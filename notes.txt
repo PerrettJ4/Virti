@@ -1,0 +1,4 @@
+1. Dificulty with error code: 'ERR_PACKAGE_PATH_NOT_EXPORTED'
+-> installed the latest version of postcss
+2. Finding correct usage of onTimeChange, and setting state
+-> This may result in some dleay in the images but only minute.
