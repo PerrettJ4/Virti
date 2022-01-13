@@ -38,7 +38,6 @@ main {
   width: 80vw;
   margin: 0 auto;
   margin-bottom: 20px;
-  display: flex;
 }
 .content video {
   width: 100%;
@@ -60,6 +59,6 @@ main {
   right: 0;
 }
 #image3 {
-  left: 0;
-  top: 0;
+  left: 45%;
+  top: 45%;
 }
