@@ -1,31 +1,22 @@
 import React, { useState } from "react";
 import "./App.css";
+import { updateDisplay } from "./updateDisplay";
 
 function App() {
   const [currentTime, setCurrentTime] = useState(0);
   const [isPlaying, setPlaying] = useState(false);
-  const [imageState, setImageState] = useState([{visible: false, count: 0}, {visible: false, count: 0}, {visible: false, count: 0}]);
+  const [imageState, setImageState] = useState({
+    1: { visible: false, count: 0 },
+    2: { visible: false, count: 0 },
+    3: { visible: false, count: 0 },
+  });
 
   const handleTime = (e) => {
     setCurrentTime(e.target.currentTime);
+    console.log("BERFORE: ", imageState);
+    updateDisplay(currentTime, imageState, setImageState);
+    console.log("POST: ", imageState);
   };
-  const isVisible = (id) => {
-    switch (id) {
-      case "image1":
-        const action = currentTime >= 3.5 && currentTime < 8.5;
-        action && 
-        return ;
-      case "image2":
-        return currentTime >= 6.0 && currentTime < 8.0;
-      case "image3":
-        return currentTime >= 7 && currentTime < 8.5;
-
-      default:
-      // code block
-    }
-    return;
-  };
-
 
   return (
     <div className="App">
@@ -51,27 +42,30 @@ function App() {
             alt="banana"
             id="image1"
             className="overlay"
-            style={{ display: isVisible("image1") ? "block" : "none" }}
+            style={{ display: imageState[1].visible ? "block" : "none" }}
           />
           <img
             src={process.env.PUBLIC_URL + "/images/image2.png"}
-            alt="banana"
+            alt="ps4 controller"
             id="image2"
             className="overlay"
-            style={{ display: isVisible("image2") ? "block" : "none" }}
+            style={{ display: imageState[2].visible ? "block" : "none" }}
           />
           <img
             src={process.env.PUBLIC_URL + "/images/image3.png"}
-            alt="banana"
+            alt="fire"
             id="image3"
             className="overlay"
-            style={{ display: isVisible("image3") ? "block" : "none" }}
+            style={{ display: imageState[3].visible ? "block" : "none" }}
           />
         </div>
         <div style={{ color: "white" }}>elapsed time {currentTime}</div>
         <div style={{ color: "white" }}>
           is playing: {isPlaying ? "true" : "false"}
         </div>
+        <div style={{ color: "white" }}>banana Count {imageState[1].count}</div>
+        <div style={{ color: "white" }}>ps4 Count {imageState[2].count}</div>
+        <div style={{ color: "white" }}>fire Count {imageState[3].count}</div>
       </main>
     </div>
   );
