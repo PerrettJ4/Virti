@@ -1,4 +1,9 @@
 1. Dificulty with error code: 'ERR_PACKAGE_PATH_NOT_EXPORTED'
 -> installed the latest version of postcss
 2. Finding correct usage of onTimeChange, and setting state
--> This may result in some dleay in the images but only minute.
+-> This may result in some delay in the images but only minimal.
+3. I started of thinking I could create a re-usable image component, however handing down currentTime as a prop caused infinite re-rendering
+3. I then thought of using a switch which would take in a argument from each of the images (1,2,3..) but then I realised this would be inefficient, and that the only dependant variable was time.
+-> So I changed tactic to a external Switch which is almost a timeline for the video (re-factoring is neccesary)
+4. i am going to add a table fopr counting the occurences and times! chnage color on hover of things, and also the runaway button.
+5. Having a recurring error that getBOUNDINGCLIENTRECT() IS RETURNing null on page opening. Going to try and remove the logic from inline.

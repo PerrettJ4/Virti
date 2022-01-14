@@ -1,5 +1,4 @@
 export const updateDisplay = (currentTime, imageState, setImageState) => {
-  console.log(currentTime);
   switch (true) {
     case currentTime < 3.5:
       // NO IMAGES VISIBLE
@@ -8,7 +7,6 @@ export const updateDisplay = (currentTime, imageState, setImageState) => {
         2: { ...imageState[2], visible: false },
         3: { ...imageState[3], visible: false },
       });
-      console.log("case 0");
       break;
     case currentTime < 6:
       // ONLY BANANA VISIBLE
@@ -48,7 +46,6 @@ export const updateDisplay = (currentTime, imageState, setImageState) => {
       // PS4 REMOVED
       setImageState({
         ...imageState,
-
         1: { visible: false, count: imageState[1].count },
         2: { visible: false, count: imageState[2].count },
       });

@@ -1,8 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import "./App.css";
 import { updateDisplay } from "./updateDisplay";
+import { runawayButton } from "./runawayButton";
 
 function App() {
+  const [theme, setTheme] = useState({
+    bgColor: "black",
+    textColor: "white",
+  });
   const [currentTime, setCurrentTime] = useState(0);
   const [isPlaying, setPlaying] = useState(false);
   const [imageState, setImageState] = useState({
@@ -10,18 +15,22 @@ function App() {
     2: { visible: false, count: 0 },
     3: { visible: false, count: 0 },
   });
+  const buttonRef = useRef();
 
   const handleTime = (e) => {
     setCurrentTime(e.target.currentTime);
-    console.log("BERFORE: ", imageState);
     updateDisplay(currentTime, imageState, setImageState);
-    console.log("POST: ", imageState);
   };
 
+  // Evil button logic
+  const evilButton = document.querySelector("#button");
+
+  // console.log(mousePosition);
+
   return (
-    <div className="App">
+    <div className="App" onMouseMove={(e) => runawayButton(e, buttonRef)}>
       <header className="App-header">Big Buck Bunny</header>
-      <main>
+      <main style={{ backgroundColor: theme.bgColor }}>
         <div className="content">
           <video
             autoPlay
@@ -43,6 +52,9 @@ function App() {
             id="image1"
             className="overlay"
             style={{ display: imageState[1].visible ? "block" : "none" }}
+            onMouseOver={() =>
+              setTheme({ bgColor: "yellow", textColor: "black" })
+            }
           />
           <img
             src={process.env.PUBLIC_URL + "/images/image2.png"}
@@ -50,6 +62,9 @@ function App() {
             id="image2"
             className="overlay"
             style={{ display: imageState[2].visible ? "block" : "none" }}
+            onMouseOver={() =>
+              setTheme({ bgColor: "magenta", textColor: "white" })
+            }
           />
           <img
             src={process.env.PUBLIC_URL + "/images/image3.png"}
@@ -57,15 +72,89 @@ function App() {
             id="image3"
             className="overlay"
             style={{ display: imageState[3].visible ? "block" : "none" }}
+            onMouseOver={() =>
+              setTheme({ bgColor: "red", textColor: "yellow" })
+            }
           />
         </div>
-        <div style={{ color: "white" }}>elapsed time {currentTime}</div>
-        <div style={{ color: "white" }}>
-          is playing: {isPlaying ? "true" : "false"}
-        </div>
-        <div style={{ color: "white" }}>banana Count {imageState[1].count}</div>
-        <div style={{ color: "white" }}>ps4 Count {imageState[2].count}</div>
-        <div style={{ color: "white" }}>fire Count {imageState[3].count}</div>
+
+        <section
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-between",
+            width: "78%",
+            marginLeft: "auto",
+            marginRight: "auto",
+          }}
+        >
+          <table className="content-table">
+            <tbody>
+              <tr>
+                <td>
+                  <img
+                    src={process.env.PUBLIC_URL + "/images/image1.png"}
+                    alt="banana"
+                    onMouseOver={() =>
+                      setTheme({ bgColor: "yellow", textColor: "black" })
+                    }
+                  />
+                </td>
+                <td>{imageState[1].count}</td>
+              </tr>
+              <tr>
+                <td>
+                  <img
+                    src={process.env.PUBLIC_URL + "/images/image2.png"}
+                    alt="ps4"
+                    onMouseOver={() =>
+                      setTheme({ bgColor: "magenta", textColor: "white" })
+                    }
+                  />
+                </td>
+                <td>{imageState[2].count}</td>
+              </tr>
+              <tr>
+                <td>
+                  <img
+                    src={process.env.PUBLIC_URL + "/images/image3.png"}
+                    alt="fire"
+                    onMouseOver={() =>
+                      setTheme({ bgColor: "red", textColor: "yellow" })
+                    }
+                  />
+                </td>
+                <td>{imageState[3].count}</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-evenly",
+              width: "30%",
+            }}
+          >
+            <div>
+              <div style={{ color: theme.textColor }}>
+                elapsed time {currentTime}
+              </div>
+              <div style={{ color: theme.textColor }}>
+                is playing: {isPlaying ? "true" : "false"}
+              </div>
+            </div>
+
+            <button
+              id="button"
+              onClick={() => alert("Nice Catch") + window.location.reload()}
+              ref={buttonRef}
+            >
+              Refresh Video
+            </button>
+          </div>
+        </section>
       </main>
     </div>
   );
