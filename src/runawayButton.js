@@ -10,6 +10,16 @@ export const runawayButton = (e, evilButton) => {
     if (distanceFromCenter(left, windowBox.left, buttonBox.width) < 0) {
       left = windowBox.right - buttonBox.width - OFFSET;
     }
+    if (distanceFromCenter(left, windowBox.right, buttonBox.width) > 0) {
+      left = windowBox.left + OFFSET;
+    }
+    if (distanceFromCenter(top, windowBox.top, buttonBox.height) < 0) {
+      left = windowBox.bottom - buttonBox.height - OFFSET;
+    }
+    if (distanceFromCenter(top, windowBox.bottom, buttonBox.heihgt) > 0) {
+      left = windowBox.top + OFFSET;
+    }
+
     evilButton.style.left = `${left}px`;
     evilButton.style.top = `${top}px`;
   };

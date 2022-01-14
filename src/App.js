@@ -15,20 +15,20 @@ function App() {
     2: { visible: false, count: 0 },
     3: { visible: false, count: 0 },
   });
+  // useRef for runaway button - passed into mouseover of App div
   const buttonRef = useRef();
 
+  // external function which set the images timeline states
   const handleTime = (e) => {
     setCurrentTime(e.target.currentTime);
     updateDisplay(currentTime, imageState, setImageState);
   };
 
-  // Evil button logic
-  const evilButton = document.querySelector("#button");
-
-  // console.log(mousePosition);
-
   return (
-    <div className="App" onMouseMove={(e) => runawayButton(e, buttonRef)}>
+    <div
+      className="App"
+      onMouseMove={(e) => runawayButton(e, buttonRef.current)}
+    >
       <header className="App-header">Big Buck Bunny</header>
       <main style={{ backgroundColor: theme.bgColor }}>
         <div className="content">
@@ -84,6 +84,8 @@ function App() {
             flexDirection: "row",
             justifyContent: "space-between",
             width: "78%",
+            maxWidth: "800px",
+
             marginLeft: "auto",
             marginRight: "auto",
           }}
@@ -134,6 +136,7 @@ function App() {
               display: "flex",
               flexDirection: "column",
               justifyContent: "space-evenly",
+              alignItems: "center",
               width: "30%",
             }}
           >
@@ -145,7 +148,7 @@ function App() {
                 is playing: {isPlaying ? "true" : "false"}
               </div>
             </div>
-
+            <div></div>
             <button
               id="button"
               onClick={() => alert("Nice Catch") + window.location.reload()}

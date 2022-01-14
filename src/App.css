@@ -37,6 +37,7 @@ main {
 .content {
   position: relative;
   width: 80vw;
+  max-width: 800px;
   margin: 0 auto;
   margin-bottom: 20px;
 }

@@ -7,3 +7,4 @@
 -> So I changed tactic to a external Switch which is almost a timeline for the video (re-factoring is neccesary)
 4. i am going to add a table fopr counting the occurences and times! chnage color on hover of things, and also the runaway button.
 5. Having a recurring error that getBOUNDINGCLIENTRECT() IS RETURNing null on page opening. Going to try and remove the logic from inline.
+-> managed to fix it and that was super easy! however, for some reason, my button does not come back to the other side of the screen when disappering :s
